@@ -1,47 +1,31 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  let calculator = "";
+  function addSymbol(event) {
+    console.log(event.target.innerText);
+    calculator = event.target.innerText;
+  }
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <input type="text" v-bind:src="calculator" disabled="true" />
+    <button @click="addSymbol">0</button>
+    <button @click="addSymbol">1</button>
+    <button @click="addSymbol">2</button>
+    <button @click="addSymbol">3</button>
+    <button @click="addSymbol">4</button>
+    <button @click="addSymbol">5</button>
+    <button @click="addSymbol">6</button>
+    <button @click="addSymbol">7</button>
+    <button @click="addSymbol">8</button>
+    <button @click="addSymbol">9</button>
+    <button @click="addSymbol">+</button>
+    <button @click="addSymbol">-</button>
+    <button @click="addSymbol">/</button>
+    <button @click="addSymbol">*</button>
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
