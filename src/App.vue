@@ -2,10 +2,10 @@
   import { ref } from 'vue';
 
   const calculatorDisplay:{ value:string } = ref('');
+  const buttons:Array<string> = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '/', '.', '0', '=', '*', 'C'];
   let currentSymbol:string = '';
   let storedValue:string = '';
   let clearInput:boolean = false;
-
 
   function addInput(input:string) {
     if (isMathSymbol(input)) {
@@ -61,23 +61,7 @@
     <div class="w-[200px] mt-10">
       <input class="border-1 w-full rounded text-right pr-[5px] pl-[5px] h-[50px]" type="text" :value="calculatorDisplay" disabled="true" />
       <div class="mt-[5px] grid grid-cols-4 grid-rows-5">
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('1')">1</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('2')">2</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('3')">3</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('+')">+</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('4')">4</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('5')">5</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('6')">6</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('-')">-</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('7')">7</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('8')">8</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('9')">9</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('/')">/</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('.')">.</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('0')">0</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('=')">=</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('*')">*</button>
-        <button class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput('C')">C</button>
+        <button v-for="x in buttons" :key="x" class="hover:bg-gray-200 border-1 rounded h-[30px]" @click="addInput(x)">{{ x }}</button>
       </div>
     </div>
   </main>
