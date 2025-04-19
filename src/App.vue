@@ -1,29 +1,23 @@
 <script setup lang="ts">
   import { ref } from 'vue';
 
-  const calculatorDisplay:object = ref('');
+  const calculatorDisplay:{ value:string } = ref('');
   let currentSymbol:string = '';
   let storedValue:string = '';
   let clearInput:boolean = false;
 
 
-  function addInput(event:Event) {
-    if (event.target && event.target.innerText) {
-      const input:string = event.target.innerText;
-      if (isSymbol(input)) {
-        addSymbol(input);
-      } else if (input === '=') {
-        doMath();
-        currentSymbol = '';
-        storedValue = '';
-      } else if (input === 'C') {
-        currentSymbol = '';
-        storedValue = '';
-        clearInput = true;
-        calculatorDisplay.value = '';
-      } else {
-        addNumber(event.target.innerText);
-      }
+  function addInput(event:MouseEvent<HTMLElement>) {
+    const input:string = event.target.innerText;
+    if (isMathSymbol(input)) {
+      addSymbol(input);
+    } else if (input === '=') {
+      doMath();
+      clearStatus();
+    } else if (input === 'C') {
+      clearStatus(true);
+    } else {
+      addNumber(input);
     }
   }
 
@@ -34,7 +28,6 @@
     }
     let tmpNumber:string = calculatorDisplay.value.toString();
     tmpNumber += number;
-    console.log(tmpNumber);
     calculatorDisplay.value = tmpNumber;
   }
 
@@ -43,17 +36,24 @@
   }
 
   function addSymbol(symbol:string) {
-    clearInput = true;
     if (currentSymbol !== '') {
       doMath();
     }
+    clearInput = true;
     currentSymbol = symbol;
     storedValue = calculatorDisplay.value;
   }
 
-  function isSymbol(char:string) {
+  function isMathSymbol(char:string) {
     const symbols:Array<string> = [ '+', '-', '/', '*'];
     return !!symbols.find((symbol) => symbol === char);
+  }
+
+  function clearStatus(clearDisplay:boolean = false) {
+    currentSymbol = '';
+    storedValue = '';
+    clearInput = true;
+    calculatorDisplay.value = clearDisplay ?  '' : calculatorDisplay.value;
   }
 </script>
 
